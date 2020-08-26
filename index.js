@@ -7,7 +7,7 @@ const app = express();
 const USER_OAUTH_TOKEN = process.env.USER_OAUTH_TOKEN;
 const BOT_OAUTH_TOKEN = process.env.BOT_OAUTH_TOKEN;
 const CHANNEL_ID = process.env.ADMIN_CHANNEL_ID;
-const ENDPOINT = process.env.ENDPOINT;
+const API_ENDPOINT = process.env.API_ENDPOINT;
 
 const client = new WebClient(USER_OAUTH_TOKEN);
 
@@ -43,14 +43,14 @@ app.get('/ping', (req, res) => {
   log('Pinged 🤖');
 });
 
-app.post(`/${ENDPOINT}`, (req, res) => {
-  res.status(200).send("Status Changed!");
+app.post(`/${API_ENDPOINT}`, (req, res) => {
+  res.status(200).send("Status Changed");
   changeStatus(':jacob:', 'testing', 0.1);
 });
 
 app.listen(process.env.PORT || 3000, async () => {
 	try {
-		log('Starting express server 🏁');
+		log('Starting express server 🟢');
   } catch (err) {
     console.error(err);
     log('THERE WAS AN ERROR WITH THE EXPRESS SERVER 🚨');

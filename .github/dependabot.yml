@@ -1,0 +1,14 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    reviewers:
+      - "saharshy29"
+    assignees:
+      - "saharshy29"
+    open-pull-requests-limit: 5
+    rebase-strategy: "auto"
+    commit-message:
+      prefix: "️dependabot:"
+    schedule:
+      interval: "daily"
