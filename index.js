@@ -7,6 +7,7 @@ const app = express();
 const USER_OAUTH_TOKEN = process.env.USER_OAUTH_TOKEN;
 const BOT_OAUTH_TOKEN = process.env.BOT_OAUTH_TOKEN;
 const CHANNEL_ID = process.env.ADMIN_CHANNEL_ID;
+const ENDPOINT = process.env.ENDPOINT;
 
 const client = new WebClient(USER_OAUTH_TOKEN);
 
@@ -37,11 +38,14 @@ const changeStatus = async (emoji, text, time) => {
   log(`Set status for ${time} minutes: ${emoji} ${text}`);
 };
 
-changeStatus(':jacob:', 'testing shit dw about it', 0.1);
-
-app.get('/', (req, res) => {
+app.get('/ping', (req, res) => {
   res.status(200).send("Hi! I'm awake");
   log('Pinged 🤖');
+});
+
+app.post(`/${ENDPOINT}`, (req, res) => {
+  res.status(200).send("Status Changed!");
+  changeStatus(':jacob:', 'testing', 0.1);
 });
 
 app.listen(process.env.PORT || 3000, async () => {
