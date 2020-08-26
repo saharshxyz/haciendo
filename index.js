@@ -38,22 +38,37 @@ const changeStatus = async (emoji, text, time) => {
   log(`⚪️ Set status for ${time} minutes: ${emoji} ${text}`);
 };
 
+const setDnd = async (time) => {
+  if (time > 1) {
+    log('🔕 DND on');
+    return await client.dnd.setSnooze({
+      token: USER_OAUTH_TOKEN,
+      num_minutes: time,
+    });
+  } else if (time == 0) {
+    log('🔔DND off');
+    return await client.dnd.endDnd({
+      token: USER_OAUTH_TOKEN,
+    });
+  }
+};
+
 app.get('/ping', (req, res) => {
   res.status(200).send("Hi! I'm awake");
-  log('🤖 Pinged 🤖');
+  log('🤖 Pinged');
 });
 
 app.listen(process.env.PORT || 3000, async () => {
 	try {
-		log('🟢 Starting express server 🟢');
+		log('🟢 Starting express server');
   } catch (err) {
     console.error(err);
-    log('🚨 THERE WAS AN ERROR WITH THE EXPRESS SERVER 🚨');
+    log('🚨 THERE WAS AN ERROR WITH THE EXPRESS SERVER');
   }
 });
 
 process.on('SIGINT' || 'SIGTERM', () => {
-  log('🔴 Down 🔴');
+  log('🔴 Down');
 });
 
 // ----------
@@ -61,8 +76,9 @@ process.on('SIGINT' || 'SIGTERM', () => {
 // ----------
 
 app.post(`/${API_ENDPOINT}/clear`, (req, res) => {
-  res.status(200).send('Removed Status');
+  res.status(200).send('Removed Status and turned off DND');
   changeStatus('', '', 0);
+  setDnd(0);
 });
 
 app.post(`/${API_ENDPOINT}/drive`, (req, res) => {
@@ -78,4 +94,5 @@ app.post(`/${API_ENDPOINT}/shower`, (req, res) => {
 app.post(`/${API_ENDPOINT}/running`, (req, res) => {
   res.status(200).send('Set Running Status');
   changeStatus(':runner:', '', 20);
+  setDnd(25);
 });
