@@ -35,33 +35,47 @@ const changeStatus = async (emoji, text, time) => {
     console.error(error);
   }
 
-  log(`Set status for ${time} minutes: ${emoji} ${text}`);
+  log(`⚪️ Set status for ${time} minutes: ${emoji} ${text}`);
 };
-
-app.post(`/${API_ENDPOINT}`, (req, res) => {
-  res.status(200).send("Set Driving Status");
-  changeStatus(':oncoming_automobile:', '', 80);
-});
-
-app.post(`/${API_ENDPOINT}/done`, (req, res) => {
-  res.status(200).send("Removed Status");
-  changeStatus('', '', 0);
-});
 
 app.get('/ping', (req, res) => {
   res.status(200).send("Hi! I'm awake");
-  log('Pinged 🤖');
+  log('🤖 Pinged 🤖');
 });
 
 app.listen(process.env.PORT || 3000, async () => {
 	try {
-		log('Starting express server 🟢');
+		log('🟢 Starting express server 🟢');
   } catch (err) {
     console.error(err);
-    log('THERE WAS AN ERROR WITH THE EXPRESS SERVER 🚨');
+    log('🚨 THERE WAS AN ERROR WITH THE EXPRESS SERVER 🚨');
   }
 });
 
 process.on('SIGINT' || 'SIGTERM', () => {
-  log('Down 🔴');
+  log('🔴 Down 🔴');
+});
+
+// ----------
+// all endpoints and commands
+// ----------
+
+app.post(`/${API_ENDPOINT}/clear`, (req, res) => {
+  res.status(200).send('Removed Status');
+  changeStatus('', '', 0);
+});
+
+app.post(`/${API_ENDPOINT}/drive`, (req, res) => {
+  res.status(200).send('Set Driving Status');
+  changeStatus(':oncoming_automobile:', '', 80);
+});
+
+app.post(`/${API_ENDPOINT}/shower`, (req, res) => {
+  res.status(200).send('Set Shower Status');
+  changeStatus(':shower:', '', 30);
+});
+
+app.post(`/${API_ENDPOINT}/running`, (req, res) => {
+  res.status(200).send('Set Running Status');
+  changeStatus(':runner:', '', 20);
 });
