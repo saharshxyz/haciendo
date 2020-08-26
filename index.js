@@ -45,7 +45,7 @@ app.get('/ping', (req, res) => {
 
 app.post(`/${API_ENDPOINT}`, (req, res) => {
   res.status(200).send("Status Changed");
-  changeStatus(':jacob:', 'testing', 0.1);
+  changeStatus(':oncoming_automobile: ', '', 80);
 });
 
 app.listen(process.env.PORT || 3000, async () => {
