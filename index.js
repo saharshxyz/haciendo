@@ -38,14 +38,19 @@ const changeStatus = async (emoji, text, time) => {
   log(`Set status for ${time} minutes: ${emoji} ${text}`);
 };
 
+app.post(`/${API_ENDPOINT}`, (req, res) => {
+  res.status(200).send("Set Driving Status");
+  changeStatus(':oncoming_automobile:', '', 80);
+});
+
+app.post(`/${API_ENDPOINT}/done`, (req, res) => {
+  res.status(200).send("Removed Status");
+  changeStatus('', '', 0);
+});
+
 app.get('/ping', (req, res) => {
   res.status(200).send("Hi! I'm awake");
   log('Pinged 🤖');
-});
-
-app.post(`/${API_ENDPOINT}`, (req, res) => {
-  res.status(200).send("Status Changed");
-  changeStatus(':oncoming_automobile: ', '', 80);
 });
 
 app.listen(process.env.PORT || 3000, async () => {
