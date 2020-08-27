@@ -81,12 +81,12 @@ app.post(`/${API_ENDPOINT}/clear`, (req, res) => {
   setDnd(0);
 });
 
-app.post(`/${API_ENDPOINT}/drive`, (req, res) => {
+app.post(`/${API_ENDPOINT}/driving`, (req, res) => {
   res.status(200).send('Set Driving Status');
   changeStatus(':oncoming_automobile:', '', 80);
 });
 
-app.post(`/${API_ENDPOINT}/shower`, (req, res) => {
+app.post(`/${API_ENDPOINT}/showering`, (req, res) => {
   res.status(200).send('Set Shower Status');
   changeStatus(':shower:', '', 30);
 });
