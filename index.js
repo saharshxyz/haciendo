@@ -46,7 +46,7 @@ const setDnd = async (time) => {
       num_minutes: time,
     });
   } else if (time == 0) {
-    log('🔔DND off');
+    log('🔔 DND off');
     return await client.dnd.endDnd({
       token: USER_OAUTH_TOKEN,
     });
@@ -81,12 +81,12 @@ app.post(`/${API_ENDPOINT}/clear`, (req, res) => {
   setDnd(0);
 });
 
-app.post(`/${API_ENDPOINT}/drive`, (req, res) => {
+app.post(`/${API_ENDPOINT}/driving`, (req, res) => {
   res.status(200).send('Set Driving Status');
   changeStatus(':oncoming_automobile:', '', 80);
 });
 
-app.post(`/${API_ENDPOINT}/shower`, (req, res) => {
+app.post(`/${API_ENDPOINT}/showering`, (req, res) => {
   res.status(200).send('Set Shower Status');
   changeStatus(':shower:', '', 30);
 });
@@ -95,4 +95,26 @@ app.post(`/${API_ENDPOINT}/running`, (req, res) => {
   res.status(200).send('Set Running Status');
   changeStatus(':runner:', '', 20);
   setDnd(25);
+});
+
+app.post(`/${API_ENDPOINT}/sleeping`, (req, res) => {
+		let emoji
+  
+	switch (Math.floor(Math.random() * 3)) {
+		
+		case 0: 
+			emoji = ':zzz:';
+			break;
+		
+		case 1: 
+			emoji = ':sleeping:';
+			break;
+
+		case 2:
+			emoji = ':bed:';
+			break;
+	}
+		
+	res.status(200).send('Set Sleeping Status');
+	changeStatus(emoji, '', 540);
 });
