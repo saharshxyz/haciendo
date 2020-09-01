@@ -59,8 +59,8 @@ app.get('/ping', (req, res) => {
 });
 
 app.listen(process.env.PORT || 3000, async () => {
-	try {
-		log('🟢 Starting express server');
+  try {
+    log('🟢 Starting express server');
   } catch (err) {
     console.error(err);
     log('🚨 THERE WAS AN ERROR WITH THE EXPRESS SERVER');
@@ -83,38 +83,37 @@ app.post(`/${API_ENDPOINT}/clear`, (req, res) => {
 
 app.post(`/${API_ENDPOINT}/driving`, (req, res) => {
   res.status(200).send('Set Driving Status');
-  changeStatus(':oncoming_automobile:', '', 80);
+  changeStatus(':oncoming_automobile:', 'driving, will respond later', 80);
 });
 
 app.post(`/${API_ENDPOINT}/showering`, (req, res) => {
   res.status(200).send('Set Shower Status');
-  changeStatus(':shower:', '', 30);
+  changeStatus(':shower:', "go away, i'm taking a shower", 30);
 });
 
 app.post(`/${API_ENDPOINT}/running`, (req, res) => {
   res.status(200).send('Set Running Status');
-  changeStatus(':runner:', '', 20);
+  changeStatus(':runner:', 'on a run', 20);
   setDnd(25);
 });
 
 app.post(`/${API_ENDPOINT}/sleeping`, (req, res) => {
-		let emoji
-  
-	switch (Math.floor(Math.random() * 3)) {
-		
-		case 0: 
-			emoji = ':zzz:';
-			break;
-		
-		case 1: 
-			emoji = ':sleeping:';
-			break;
+  let emoji;
 
-		case 2:
-			emoji = ':bed:';
-			break;
-	}
-		
-	res.status(200).send('Set Sleeping Status');
-	changeStatus(emoji, '', 540);
+  switch (Math.floor(Math.random() * 3)) {
+    case 0:
+      emoji = ':zzz:';
+      break;
+
+    case 1:
+      emoji = ':sleeping:';
+      break;
+
+    case 2:
+      emoji = ':bed:';
+      break;
+  }
+
+  res.status(200).send('Set Sleeping Status');
+  changeStatus(emoji, 'sleeping', 540);
 });
