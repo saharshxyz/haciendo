@@ -82,8 +82,20 @@ app.post(`/${API_ENDPOINT}/clear`, (req, res) => {
 });
 
 app.post(`/${API_ENDPOINT}/driving`, (req, res) => {
+  let emoji;
+
+  switch (Math.floor(Math.random() * 3)) {
+    case 0:
+      emoji = ':car:';
+      break;
+
+    case 1:
+      emoji = ':oncoming_automobile:';
+      break;
+  }
+
   res.status(200).send('Set Driving Status');
-  changeStatus(':oncoming_automobile:', 'driving, will respond later', 80);
+  changeStatus(emoji, 'driving, will respond later', 80);
 });
 
 app.post(`/${API_ENDPOINT}/showering`, (req, res) => {
