@@ -82,50 +82,30 @@ app.post(`/${API_ENDPOINT}/clear`, (req, res) => {
 });
 
 app.post(`/${API_ENDPOINT}/driving`, (req, res) => {
-  let emoji;
-
-  switch (Math.floor(Math.random() * 3)) {
-    case 0:
-      emoji = ':car:';
-      break;
-
-    case 1:
-      emoji = ':oncoming_automobile:';
-      break;
-  }
+  const emojis = [':oncoming_automobile:', ':car:'];
 
   res.status(200).send('Set Driving Status');
-  changeStatus(emoji, 'driving, will respond later', 80);
+  changeStatus(emojis[Math.floor(Math.random() * emojis.length)], '', 80);
 });
 
 app.post(`/${API_ENDPOINT}/showering`, (req, res) => {
+  const emojis = [':runner:', ':athletic_shoe: '];
+
   res.status(200).send('Set Shower Status');
-  changeStatus(':shower:', "go away, i'm taking a shower", 30);
+  changeStatus(emojis[Math.floor(Math.random() * emojis.length)], '', 30);
 });
 
 app.post(`/${API_ENDPOINT}/running`, (req, res) => {
+  const emojis = [':runner:', ':athletic_shoe: '];
+
   res.status(200).send('Set Running Status');
-  changeStatus(':runner:', 'on a run', 20);
+  changeStatus(emojis[Math.floor(Math.random() * emojis.length)], '', 20);
   setDnd(25);
 });
 
 app.post(`/${API_ENDPOINT}/sleeping`, (req, res) => {
-  let emoji;
-
-  switch (Math.floor(Math.random() * 3)) {
-    case 0:
-      emoji = ':zzz:';
-      break;
-
-    case 1:
-      emoji = ':sleeping:';
-      break;
-
-    case 2:
-      emoji = ':bed:';
-      break;
-  }
+  const emojis = [':zzz:', ':sleeping:', ':bed:'];
 
   res.status(200).send('Set Sleeping Status');
-  changeStatus(emoji, 'sleeping', 540);
+  changeStatus(emojis[Math.floor(Math.random() * emojis.length)], '', 540);
 });
