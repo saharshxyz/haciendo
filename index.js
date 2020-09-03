@@ -104,7 +104,7 @@ app.post(`/${API_ENDPOINT}/running`, (req, res) => {
 });
 
 app.post(`/${API_ENDPOINT}/sleeping`, (req, res) => {
-  const emojis = [':zzz:', ':sleeping:', ':bed:'];
+  const emojis = [':zzz:'];
 
   res.status(200).send('Set Sleeping Status');
   changeStatus(emojis[Math.floor(Math.random() * emojis.length)], '', 540);
