@@ -89,7 +89,7 @@ app.post(`/${API_ENDPOINT}/driving`, (req, res) => {
 });
 
 app.post(`/${API_ENDPOINT}/showering`, (req, res) => {
-  const emojis = [':runner:', ':athletic_shoe: '];
+  const emojis = [':shower:'];
 
   res.status(200).send('Set Shower Status');
   changeStatus(emojis[Math.floor(Math.random() * emojis.length)], '', 30);
