@@ -41,13 +41,13 @@ const changeStatus = async (emoji: string, text: string, time: number) => {
 const setDnd = async (time: number) => {
 	if (time > 1) {
 		log('🔕 DND on');
-		return await client.dnd.setSnooze({
+		return client.dnd.setSnooze({
 			token: USER_OAUTH_TOKEN,
 			num_minutes: time,
 		});
 	} else if (time == 0) {
 		log('🔔 DND off');
-		return await client.dnd.endDnd({
+		return client.dnd.endDnd({
 			token: USER_OAUTH_TOKEN,
 		});
 	}
