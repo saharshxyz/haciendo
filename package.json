@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"build": "tsc index.js",
+		"build": "tsc index.ts",
 		"start": "npm run build && node index.js"
 	},
 	"repository": {
